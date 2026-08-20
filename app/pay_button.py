@@ -24,7 +24,7 @@ class Form(StatesGroup):
 
 def create_payment_method(user_id: int, email: str, price):
     return CreatePaymentParams(
-        amount=Money(value=float(YooKasConfig.value_cur), currency=Currency.RUB),
+        amount=Money(value=float(price), currency=Currency.RUB),
         confirmation=Confirmation(
             type=ConfirmationType.REDIRECT,
             return_url=YooKasConfig.return_url_api
@@ -35,7 +35,7 @@ def create_payment_method(user_id: int, email: str, price):
         receipt=Receipt(
             items=[
                 PaymentItem(description=f"Подписка 30 дней на FIT-лабораторию - {price}p",
-                            amount=Money(value=float(YooKasConfig.value_cur), currency=Currency.RUB),
+                            amount=Money(value=float(price), currency=Currency.RUB),
                             quantity=1,
                             vat_code=11,
                             payment_subject=PaymentSubject.COMMODITY,

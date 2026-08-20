@@ -16,7 +16,6 @@ class YooKasConfig:
     shop_id: int =os.getenv('SHOP_ID')
     link: str = os.getenv("LINKS")
     return_url_api: str = os.getenv('RETURN_URL')
-    value_cur: float = os.getenv("VALUE_CUR")
     time_delta: int = os.getenv("TIME_DELTA", 60)
 
 @dataclass
