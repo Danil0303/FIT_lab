@@ -9,7 +9,7 @@ from loguru import logger
 @connection
 async def get_users(session: async_sessions) -> list[FitSubscribe]:
     result = await session.execute(select(FitSubscribe))
-    users = result.scalar().all()
+    users = result.scalars().all()
     return users
 
 @connection
@@ -26,7 +26,7 @@ async def add_user(session: async_sessions, id_user: int, username: str, email: 
     user = await get_user(id_user)
     if user:
         logger.info(f'Пользователь {id_user} ({username})уже существует')
-        return await update_date_subscribe(id_user)
+        return await update_date_subscribe(id_user, username)
     try:
         data = datetime.today()
         user_new = FitSubscribe(id_user=id_user,
