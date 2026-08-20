@@ -73,7 +73,7 @@ async def process_email(message: types.Message, state: FSMContext, bot: Bot):
     if user_price:
         price = float(user_price.price)
     else:
-        users = len(await get_users)
+        users = len(await get_users())
         if users <= 25:
             price = float(1299)
         elif 25 < users <= 50:
