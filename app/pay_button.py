@@ -118,14 +118,14 @@ async def process_email(message: types.Message, state: FSMContext, bot: Bot):
                                 Поздравляю, оплата прошла успешно!✅\nСсылка для входа👉🏻 {YooKasConfig.link}\nДоступ активен 30 дней с момента оплаты.
                             """
                         )
-                        return await bot.send_message(chat_id=769552852, text=f'Пользователь: @{message.from_user.username} оплатил подписку за {str(price)}!')
+                        return await bot.send_message(chat_id=822290548, text=f'Пользователь: @{message.from_user.username} оплатил подписку за {str(price)}!')
                     await message.answer(text="Оплата не прошла!")
-                    await bot.send_message(chat_id=769552852,
+                    await bot.send_message(chat_id=822290548,
                                            text=f'Пользователь: @{message.from_user.username} не смог оплатить подписку!')
                 except TimeOutPayments as exp:
                     logger.error(exp)
                     await message.answer(text="Оплата не прошла!")
-                    await bot.send_message(chat_id=769552852,
+                    await bot.send_message(chat_id=822290548,
                                            text=f'Пользователь: @{message.from_user.username} не смог оплатить подписку!')
         except Exception as e:
             logger.error(e)
