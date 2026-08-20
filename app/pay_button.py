@@ -115,20 +115,18 @@ async def process_email(message: types.Message, state: FSMContext, bot: Bot):
                         await message.answer_photo(
                             photo=FSInputFile(path=pathlib.Path(r'templates/images/pay_s.jpg')),
                             caption=f"""
-                                Поздравляю, оплата прошла успешно!✅
-                                Ссылка для входа👉🏻 {YooKasConfig.link}
-                                Доступ активен 30 дней с момента оплаты.
+                                Поздравляю, оплата прошла успешно!✅\nСсылка для входа👉🏻 {YooKasConfig.link}\nДоступ активен 30 дней с момента оплаты.
                             """
                         )
-                        return await bot.send_message(chat_id=769552852, text=f'Пользователь: {message.from_user.username} оплатил подписку!')
+                        return await bot.send_message(chat_id=769552852, text=f'Пользователь: @{message.from_user.username} оплатил подписку за {str(price)}!')
                     await message.answer(text="Оплата не прошла!")
                     await bot.send_message(chat_id=769552852,
-                                           text=f'Пользователь: {message.from_user.username} не смог оплатить подписку!')
+                                           text=f'Пользователь: @{message.from_user.username} не смог оплатить подписку!')
                 except TimeOutPayments as exp:
                     logger.error(exp)
                     await message.answer(text="Оплата не прошла!")
                     await bot.send_message(chat_id=769552852,
-                                           text=f'Пользователь: {message.from_user.username} не смог оплатить подписку!')
+                                           text=f'Пользователь: @{message.from_user.username} не смог оплатить подписку!')
         except Exception as e:
             logger.error(e)
             await message.answer( "Упс, похоже, что-то пошло не так. Обратись за помощью сюда: @alla_an")
