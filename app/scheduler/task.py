@@ -1,6 +1,6 @@
 from aiogram import Bot
 from loguru import logger
-from app.db.method import get_users
+from app.db.method import get_users, delete_user
 from datetime import datetime
 
 from config import SettingConfig
@@ -22,6 +22,7 @@ async def push_sub(bot: Bot):
                 await bot.send_message(chat_id=user.id_user,
                                        text="Сегодня последний день! Если хотите остаться в канале, оплатите продление по вашей личной цене (она сохраняется за вами)")
             elif del_time == 31:
+                await delete_user(user_id=user.id_user, username=user.username)
                 await bot.ban_chat_member(user_id=user.id_user, chat_id=str(SettingConfig.channel_id))
                 await bot.send_message(chat_id=user.id_user,
                                        text="Вы удалены из канала!")
