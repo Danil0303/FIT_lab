@@ -4,6 +4,7 @@ from aiogram import Router, types
 from aiogram.types import FSInputFile
 
 from app.button import start_button, pay_button
+from app.db.method import get_user, get_users
 
 router_menu = Router()
 
@@ -36,8 +37,16 @@ async def who(callback_query: types.CallbackQuery):
 
 @router_menu.callback_query(lambda c: c.data=='price')
 async def price(callback_query: types.CallbackQuery):
+    data = await get_users()
+    if len(data) <= 25:
+        text = "первые 25 мест - 1299₽/мес"
+    elif 25 < len(data) <= 50:
+        text = "Доступ на 30 дней - <del>1799₽</del> 1599₽"
+    else:
+        text = "Доступ на 30 дней - 1799₽/мес"
     await callback_query.message.answer(
-        text="555555",
+        text=f"<b>{text}</b>\n*цена фиксируется за тобой, если продлеваешь доступ вовремя",
+        parse_mode="HTML",
         reply_markup=start_button()
     )
     await callback_query.answer()
