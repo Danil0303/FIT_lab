@@ -51,19 +51,12 @@ def create_payment_method(user_id: int, email: str, price):
         save_payment_method=False
     )
 
-@router_pay.callback_query(lambda c: c.data == 'yes')
+@router_pay.callback_query(lambda c: c.data == 'pay')
 async def buy(callback_query: types.CallbackQuery, state: FSMContext):
     await callback_query.message.answer("Пожалуйста, введите ваш email для чека:")
     await state.set_state(Form.waiting_for_email)
     await callback_query.answer()
 
-@router_pay.callback_query(lambda c: c.data == 'not')
-async def not_buy(callback_query: types.CallbackQuery):
-    await callback_query.message.answer(
-        text='Буду тебя ждать',
-        reply_markup=start_button()
-    )
-    await callback_query.answer()
 
 
 @router_pay.message(Form.waiting_for_email)

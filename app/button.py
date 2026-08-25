@@ -6,16 +6,9 @@ def start_button()->InlineKeyboardMarkup:
             [InlineKeyboardButton(text='📦 Что внутри', callback_data='inside')],
             [InlineKeyboardButton(text='👤 Кому подойдет', callback_data='who')],
             [InlineKeyboardButton(text='💰 Стоимость', callback_data='price')],
-            [InlineKeyboardButton(text='💸 Оплатить', callback_data='pay')]
+            [InlineKeyboardButton(text='💸 Оплатить', callback_data='pay')],
+            [InlineKeyboardButton(text='📝 Юридическая информация', callback_data='info')]
 
-    ])
-
-def pay_button()-> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup(inline_keyboard=[
-        [
-            InlineKeyboardButton(text='Да', callback_data='yes'),
-            InlineKeyboardButton(text='Нет', callback_data='not')
-        ]
     ])
 
 

@@ -1,10 +1,10 @@
 import pathlib
 
 from aiogram import Router, types
-from aiogram.types import FSInputFile
+from aiogram.types import FSInputFile, InputMediaDocument
 
-from app.button import start_button, pay_button
-from app.db.method import get_user, get_users
+from app.button import start_button
+from app.db.method import  get_users
 
 router_menu = Router()
 
@@ -51,11 +51,18 @@ async def price(callback_query: types.CallbackQuery):
     )
     await callback_query.answer()
 
-@router_menu.callback_query(lambda c: c.data == 'pay')
-async def pay(callback_query: types.CallbackQuery):
-    await callback_query.message.answer_document(
-        document=FSInputFile(path=pathlib.Path(r'templates/documents/document.docx')),
-        reply_markup=pay_button()
+
+@router_menu.callback_query(lambda c: c.data == 'info')
+async def info(callback_query: types.CallbackQuery):
+    await callback_query.message.answer_media_group(
+        media=[
+            InputMediaDocument(media=FSInputFile(path=r'templates/documents/1_Publichnaya_oferta.docx'),
+                               caption="ИП Антонова Алла Эдуардовна\nОГРНИП 326710000030811\nИНН 711610566034\nТульская обл., г.Новомосковск\n n.yackova2017@yandex.ru"),
+            InputMediaDocument(media=FSInputFile(path=r'templates/documents/2_Politika_OPD.docx')),
+            InputMediaDocument(media=FSInputFile(path=r'templates/documents/3_Soglasie_na_OPD.docx')),
+            InputMediaDocument(media=FSInputFile(path=r'templates/documents/4_Soglasie_na_rassylki.docx'))
+        ],
+
     )
     await callback_query.answer()
 
