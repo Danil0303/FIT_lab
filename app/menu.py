@@ -54,15 +54,21 @@ async def price(callback_query: types.CallbackQuery):
 
 @router_menu.callback_query(lambda c: c.data == 'info')
 async def info(callback_query: types.CallbackQuery):
+    await callback_query.message.answer(
+        text="ИП Антонова Алла Эдуардовна\nОГРНИП 326710000030811\nИНН 711610566034\nТульская обл., г.Новомосковск\n n.yackova2017@yandex.ru"
+    )
     await callback_query.message.answer_media_group(
         media=[
-            InputMediaDocument(media=FSInputFile(path=r'templates/documents/1_Publichnaya_oferta.docx'),
-                               caption="ИП Антонова Алла Эдуардовна\nОГРНИП 326710000030811\nИНН 711610566034\nТульская обл., г.Новомосковск\n n.yackova2017@yandex.ru"),
+            InputMediaDocument(media=FSInputFile(path=r'templates/documents/1_Publichnaya_oferta.docx')),
             InputMediaDocument(media=FSInputFile(path=r'templates/documents/2_Politika_OPD.docx')),
             InputMediaDocument(media=FSInputFile(path=r'templates/documents/3_Soglasie_na_OPD.docx')),
             InputMediaDocument(media=FSInputFile(path=r'templates/documents/4_Soglasie_na_rassylki.docx'))
         ],
 
+    )
+    await callback_query.message.answer(
+        text='',
+        reply_markup=start_button()
     )
     await callback_query.answer()
 
