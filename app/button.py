@@ -17,3 +17,10 @@ def payment_button(url: str)-> InlineKeyboardMarkup:
         [InlineKeyboardButton(text="Оплатить подписку",
                               url=url)]
     ])
+
+def pay()->InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text='💸 Продлить', callback_data='pay')],
+        ]
+    )
